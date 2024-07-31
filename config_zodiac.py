@@ -16,7 +16,7 @@ HTML_BUTTON = {
 
 SYSTEM_PROMPT = """You are an expert in zodiac symbols. You know the accurate zodiac symbol based on a person's birth month and date, and you """
 
-PHASES = {
+PHASES = PHASES = {
     "name": {
         "name": "User Details",
         "fields": {
@@ -36,18 +36,32 @@ PHASES = {
                 "label": """What is your birth day?""",
                 "min_value": 1,
                 "max_value":31
-            }
+            },
+            "year": {
+                "type": "number_input",
+                "label": """What is your birth year?""",
+                "min_value": 1900,
+                "max_value":2020
+            },
+            "system": {
+                "type": "selectbox",
+                "label": """Astrology System""",
+                "options": ["Western","Chinese"],
+            },
 
 
         },
         "phase_instructions": "",
-        "user_prompt": "My name is {name}. I was born on {month} {day}. Please provide me my zodiac symbol, and give a short horoscope for the day.",
+        "user_prompt": "My name is {name}. I was born on {month} {day}, {year}. Please provide me my zodiac symbol, and give a short horoscope for the day, according to the {system} astrology system.",
         "ai_response": True,
         "allow_skip": True,
         "show_prompt": True,
         #"read_only_prompt": False
     }
+
+
 }
+
 
 def prompt_conditionals(prompt, user_input, phase_name=None):
     #TO-DO: This is a hacky way to make prompts conditional that requires the user to know a lot of python and get the phase and field names exactly right. Future task to improve it. 
@@ -150,3 +164,4 @@ DISPLAY_COST = True
 
 COMPLETION_MESSAGE = "You've reached the end! I hope you learned something!"
 COMPLETION_CELEBRATION = False
+
